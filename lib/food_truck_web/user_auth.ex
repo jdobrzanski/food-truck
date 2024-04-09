@@ -13,6 +13,23 @@ defmodule FoodTruckWeb.UserAuth do
   @remember_me_cookie "_food_truck_web_user_remember_me"
   @remember_me_options [sign: true, max_age: @max_age, same_site: "Lax"]
 
+  # JTD - Note this was taken from the phoenix guide
+  # https://hexdocs.pm/phoenix/api_authentication.html
+  # Checks the authorization header for bearer token and attempts
+  # to return the associated user. Request is aborted if token is
+  # invalid or no associated user is found.
+  def fetch_api_user(conn, _opts) do
+    with ["Bearer " <> token] <- get_req_header(conn, "authorization"),
+         {:ok, user} <- Accounts.fetch_user_by_api_token(token) do
+      assign(conn, :current_user, user)
+    else
+      _ ->
+        conn
+        |> send_resp(:unauthorized, "No access for you")
+        |> halt()
+    end
+  end
+
   @doc """
   Logs the user in.
 

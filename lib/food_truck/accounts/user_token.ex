@@ -126,6 +126,10 @@ defmodule FoodTruck.Accounts.UserToken do
     end
   end
 
+  # JTD - Note this was taken from the phoenix guide
+  # https://hexdocs.pm/phoenix/api_authentication.html
+  defp days_for_context("api-token"), do: 365
+  # JTD - End Note
   defp days_for_context("confirm"), do: @confirm_validity_in_days
   defp days_for_context("reset_password"), do: @reset_password_validity_in_days
 

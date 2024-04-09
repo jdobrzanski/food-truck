@@ -23,6 +23,14 @@ defmodule FoodTruck.AccountsFixtures do
     user
   end
 
+  def user_token_fixture(%FoodTruck.Accounts.User{} = user) do
+    encoded_token =
+      user
+      |> FoodTruck.Accounts.create_user_api_token()
+
+      encoded_token
+  end
+
   def extract_user_token(fun) do
     {:ok, captured_email} = fun.(&"[TOKEN]#{&1}[TOKEN]")
     [_, token | _] = String.split(captured_email.text_body, "[TOKEN]")

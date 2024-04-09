@@ -15,6 +15,7 @@ defmodule FoodTruckWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug :fetch_api_user
   end
 
   scope "/", FoodTruckWeb do
