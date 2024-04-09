@@ -25,6 +25,7 @@ config :food_truck, FoodTruckWeb.Endpoint,
     keyfile: "priv/cert/selfsigned_key.pem",
     certfile: "priv/cert/selfsigned.pem"
   ],
+  force_ssl: [rewrite_on: [:x_forwarded_proto], host: nil],
   check_origin: false,
   code_reloader: true,
   debug_errors: true,
