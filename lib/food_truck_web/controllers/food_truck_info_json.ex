@@ -21,7 +21,9 @@ defmodule FoodTruckWeb.FoodTruckInfoJSON do
       applicant: food_truck_info.applicant,
       facility_type: food_truck_info.facility_type,
       address: food_truck_info.address,
-      food_items: food_truck_info.food_items
+      food_items: food_truck_info.food_items,
+      latitude: food_truck_info.latitude,
+      longitude: food_truck_info.longitude
     }
   end
 end
