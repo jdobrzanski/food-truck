@@ -1,5 +1,8 @@
 {
     "scripts": {
         "deploy": "cd .. && mix assets.deploy && rm -f _build/esbuild"
+    },
+    "dependencies": {
+        "@googlemaps/js-api-loader": "^1.16.6"
     }
 }

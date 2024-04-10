@@ -2,6 +2,8 @@ defmodule FoodTruck.FoodTruckInfos.FoodTruckInfo do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @derive {Jason.Encoder, only: [:id, :applicant, :latitude, :longitude]}
+
   schema "food_truck_info" do
     field :address, :string
     field :applicant, :string

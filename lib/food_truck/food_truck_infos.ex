@@ -6,7 +6,7 @@ defmodule FoodTruck.FoodTruckInfos do
   import Ecto.Query, warn: false
   alias FoodTruck.Repo
 
-  alias FoodTruck.FoodTruckInfos.FoodTruckInfo
+  alias FoodTruck.FoodTruckInfos.{Bounds, FoodTruckInfo}
 
   @doc """
   Returns the list of food_truck_info.
@@ -19,6 +19,24 @@ defmodule FoodTruck.FoodTruckInfos do
   """
   def list_food_truck_info do
     Repo.all(FoodTruckInfo)
+  end
+
+  @doc """
+  Returns food_truck_infos within the specified bounds.
+
+  ## Examples
+
+      iex> find_food_truck_infos(%Bounds{east: -122.20818034122128, north: 37.86220385046159, south: 37.65591845232061, west: -122.66685954044003})
+      [%FoodTruckInfo{}, ...]
+
+  """
+  def find_food_truck_infos(%Bounds{} = bounds) do
+    (from fti in FoodTruckInfo,
+      where:
+        fti.longitude < ^(bounds.east) and fti.longitude > ^(bounds.west) and
+        fti.latitude < ^(bounds.north) and fti.latitude > ^(bounds.south),
+      limit: 15)
+    |> Repo.all()
   end
 
   @doc """

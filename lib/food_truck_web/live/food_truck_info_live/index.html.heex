@@ -1,0 +1,11 @@
+<.header>
+  Your Local Food Trucks!
+</.header>
+
+<div
+  id="googleMap"
+  class="w-full h-96 bg-slate-100 border-2"
+  phx-hook="GMaps"
+  phx-update="ignore"
+  data-targets={Jason.encode!(@food_truck_infos)}
+></div>

@@ -35,3 +35,6 @@ food_truck-*.tar
 npm-debug.log
 /assets/node_modules/
 
+# phoenix config
+*.secrets.exs
+

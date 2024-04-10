@@ -11,6 +11,7 @@ defmodule FoodTruckWeb.Router do
     plug :protect_from_forgery
     plug :put_secure_browser_headers
     plug :fetch_current_user
+    plug FoodTruckWeb.Plugs.GoogleMapsPlug
   end
 
   pipeline :api do
@@ -82,6 +83,14 @@ defmodule FoodTruckWeb.Router do
       on_mount: [{FoodTruckWeb.UserAuth, :mount_current_user}] do
       live "/users/confirm/:token", UserConfirmationLive, :edit
       live "/users/confirm", UserConfirmationInstructionsLive, :new
+    end
+  end
+
+  scope "/", FoodTruckWeb do
+    pipe_through [:browser, :require_authenticated_user]
+
+    live_session :google_maps do
+      live "/food_truck_infos", FoodTruckInfoLive.Index, :index
     end
   end
 end
